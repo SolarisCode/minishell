@@ -6,7 +6,7 @@
 /*   By: estruckm <estruckm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 23:06:18 by melkholy          #+#    #+#             */
-/*   Updated: 2023/06/11 18:43:09 by melkholy         ###   ########.fr       */
+/*   Updated: 2023/06/14 21:55:42 by melkholy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,19 @@ void	ft_free_envlist(t_env **env_list)
 
 void	ft_exit_minihell(char *str, t_cmds *cmd, t_mVars *list_pointers)
 {
+	int	exit_arg;
+
+	exit_arg = 0;
+	if (cmd && cmd->args)
+		exit_arg = ft_atoi(cmd->args[0]);
+	if (exit_arg < 0)
+		exit_arg += 256;
+	if (exit_arg > 255)
+		exit_arg = 0;
 	tcsetattr(STDIN_FILENO, TCSANOW, &g_term_attr.save_attr);
 	if (!str)
-	{
 		rl_on_new_line();
-		rl_redisplay();
-	}
-	if (str)
+	else
 		free(str);
 	if (cmd)
 		ft_free_cmdlist(&cmd);
@@ -78,7 +84,7 @@ void	ft_exit_minihell(char *str, t_cmds *cmd, t_mVars *list_pointers)
 	free(list_pointers);
 	write(1, "exit\n", 5);
 	clear_history();
-	exit(0);
+	exit(exit_arg);
 }
 
 /* Used to display the prompt and read the input from the user */

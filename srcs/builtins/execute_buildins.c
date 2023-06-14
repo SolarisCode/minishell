@@ -6,7 +6,7 @@
 /*   By: estruckm <estruckm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 18:24:17 by estruckm          #+#    #+#             */
-/*   Updated: 2023/06/12 20:54:04 by melkholy         ###   ########.fr       */
+/*   Updated: 2023/06/14 21:56:30 by melkholy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,26 @@ void	ft_execute_buildins(t_cmds *cmd, t_mVars *list_pointer)
 		ft_exit();
 	if (!ft_strcmp(cmd->cmd, "cd"))
 		ft_cd(cmd, list_pointer);
+}
+
+void	ft_builtin_one_cmd(t_cmds *cmd, t_mVars *vars_list)
+{
+	int	count;
+
+	count = 0;
+	if (!ft_strcmp(cmd->cmd, "exit") || !ft_strcmp(cmd->cmd, "/usr/bin/exit"))
+	{
+		if (cmd->args)
+			while (cmd->args[count])
+				count ++;
+		if (count > 1)
+		{
+			printf("minishell: too many arguments: exit\n");
+			cmd->cmd_error = 1;
+			return ;
+		}
+		ft_free_dstr(vars_list->env_array);
+		ft_exit_minihell(NULL, cmd, vars_list);
+	}
+	ft_execute_buildins(cmd, vars_list);
 }

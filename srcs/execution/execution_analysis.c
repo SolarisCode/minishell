@@ -6,7 +6,7 @@
 /*   By: estruckm <estruckm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 23:06:58 by melkholy          #+#    #+#             */
-/*   Updated: 2023/06/10 18:40:57 by melkholy         ###   ########.fr       */
+/*   Updated: 2023/06/14 21:57:13 by melkholy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ft_cmd_analysis(t_cmds *cmd, t_mVars *vars_list)
 		waitpid(pid, NULL, 0);
 	}
 	else
-		ft_execute_buildins(cmd, vars_list);
+		ft_builtin_one_cmd(cmd, vars_list);
 	if (!access("minhell_tmp.txt", F_OK))
 		unlink("minhell_tmp.txt");
 	ft_free_dstr(vars_list->env_array);

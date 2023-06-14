@@ -6,7 +6,7 @@
 /*   By: melkholy <melkholy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 02:18:50 by melkholy          #+#    #+#             */
-/*   Updated: 2023/05/22 02:18:51 by melkholy         ###   ########.fr       */
+/*   Updated: 2023/06/14 21:56:48 by melkholy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	ft_env(t_mVars *list_pointer);
 
 /* execute_builtins.c */
 void	ft_execute_buildins(t_cmds *cmd, t_mVars *list_pointer);
+void	ft_builtin_one_cmd(t_cmds *cmd, t_mVars *vars_list);
 
 /* exit.c*/
 void	ft_exit(void);
